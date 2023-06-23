@@ -31,12 +31,6 @@ import org.springframework.security.authentication.DefaultAuthenticationEventPub
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-     private static final String[] PERMIT_URL_ARRAY = {
-        /* swagger v3 */
-        "/v3/api-docs/**",
-        "/swagger-ui/**",
-        "/user/login"
-    };
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAuthenticationFilter jwtRequestFilter;
@@ -47,6 +41,14 @@ public class WebSecurityConfig {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtRequestFilter = jwtRequestFilter;
     }
+
+      private static final String[] PERMIT_URL_ARRAY = {
+        /* swagger v3 */
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+        "/",
+        "/**"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -65,13 +67,15 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.PATCH).authenticated()
                 .requestMatchers(HttpMethod.DELETE).authenticated()
                 .anyRequest().permitAll()  
-        )
-        .sessionManagement(session -> session  //중복로그인 방지
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
+       
 
         http.exceptionHandling( exceptionHandling -> exceptionHandling
           .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+        );
+
+        http.sessionManagement(session -> session  //중복로그인 방지
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

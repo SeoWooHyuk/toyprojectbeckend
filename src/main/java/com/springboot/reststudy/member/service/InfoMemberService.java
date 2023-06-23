@@ -80,11 +80,9 @@ public class InfoMemberService {
 	public LoginResponse login(LoginRequest req) {
 		authenticate(req.getId(), req.getPwd());
 
-		System.out.println(req.getId());
-		System.out.println(req.getPwd());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getId());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		
+		System.out.println(token + "토큰확인");
 		return new LoginResponse(token, req.getId());
 	}
 
