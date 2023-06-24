@@ -15,5 +15,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         AuthenticationException authException) throws IOException {
 
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        //클래스는 Spring Security에서 인증되지 않은 사용자가 보호 된 엔드 포인트에 액세스하려고 할 때 처리하는 진입점입니다
     }
 }

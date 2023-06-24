@@ -48,6 +48,7 @@ public class WebSecurityConfig {
         "/swagger-ui/**",
         "/",
         "/**"
+        
     };
 
     @Bean
@@ -63,22 +64,23 @@ public class WebSecurityConfig {
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() 
                 .dispatcherTypeMatchers(DispatcherType.INCLUDE).permitAll() 
                 .requestMatchers(PERMIT_URL_ARRAY).permitAll()  
-                .requestMatchers(HttpMethod.POST).authenticated()
-                .requestMatchers(HttpMethod.PATCH).authenticated()
-                .requestMatchers(HttpMethod.DELETE).authenticated()
+                // .requestMatchers(HttpMethod.POST).authenticated()
+                // .requestMatchers(HttpMethod.PATCH).authenticated()
+                // .requestMatchers(HttpMethod.DELETE).authenticated()
                 .anyRequest().permitAll()  
         );
        
 
         http.exceptionHandling( exceptionHandling -> exceptionHandling
-          .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+          .authenticationEntryPoint(jwtAuthenticationEntryPoint) 
         );
 
-        http.sessionManagement(session -> session  //중복로그인 방지
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        http.sessionManagement(session -> session 
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Spring Security가 HttpSession을 생성하지 않으며 세션과 관련된 어떤 상태도 저장하지 않도록합니다.
         );
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        //해당 코드는 스프링 시큐리티 필터 체인에 JWT 인증 필터를 등록합니다. jwtRequestFilter는 필터 체인에 추가하려는 사용자 정의 필터입니다. 이는 Filter 인터페이스를 구현하며, 클라이언트가 보낸 JSON Web Token (JWT)을 유효성 검사하는 역할을 합니다.
           
           
         return http.getOrBuild(); //HttpSecurity 객체를 리턴합니다.

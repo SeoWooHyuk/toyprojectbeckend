@@ -29,11 +29,11 @@ import com.springboot.reststudy.member.service.InfoMemberService;
 
 @RestController
 @RequestMapping("/user")
-public class MemberController {
+public class InfoMemberController {
 
 	private final InfoMemberService service;
 
-	public MemberController(InfoMemberService service) {
+	public InfoMemberController(InfoMemberService service) {
 		this.service = service;
 	}
 
