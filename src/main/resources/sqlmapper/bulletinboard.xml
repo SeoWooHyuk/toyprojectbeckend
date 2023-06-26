@@ -50,11 +50,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!-- <insert id="createBulboard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBulletinBoardParam"
+	<insert id="CreateBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam"
 		useGeneratedKeys="true" keyProperty="seq">
 		INSERT bulletinboard (id, ref, step, depth, title, content, created_at, del, read_count)
 		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard b), 0, 0, #{title}, #{content}, NOW(), 0, 0)
-	</insert> -->
+	</insert>
 
 
 </mapper>

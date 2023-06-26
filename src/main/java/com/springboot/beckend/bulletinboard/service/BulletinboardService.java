@@ -9,8 +9,11 @@ import com.springboot.beckend.bulletinboard.dao.BulletinboardDao;
 import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
+import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
+import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
+import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
 
 
 
@@ -47,5 +50,11 @@ public class BulletinboardService {
         return new BulletinboardListResponse(bsList, pageCnt);
 	
 	}
+
+    public CreateBullinboardResponse CreateBulBoard(CreateBullinboardRequest req)
+    {
+        CreateBullinboardParam param = new CreateBullinboardParam(req);
+        return new CreateBullinboardResponse(param.getSeq());
+    } 
     
 }
