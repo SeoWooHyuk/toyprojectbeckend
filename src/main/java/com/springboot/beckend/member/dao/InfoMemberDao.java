@@ -14,11 +14,11 @@ import com.springboot.beckend.member.dto.param.CreateInfoMemberParam;
 public interface InfoMemberDao {
     
 
-	InfoMember findById(String id);
+	public InfoMember findById(String id);
 
-	Integer isExistUserId(String id);
+	public Integer isExistUserId(String id);
 
-	Integer createMember(CreateInfoMemberParam param);
+	public Integer createMember(CreateInfoMemberParam param);
 
 
 }

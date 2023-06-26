@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.beckend.bulletinboard.dao.BulletinboardDao"> 
+	
+	<select id="getBulSearchboardList" parameterType="com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam" 
+		resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
+		SELECT *
+		FROM (SELECT row_number() OVER(ORDER BY ref DESC, step ASC) AS RowNumber,
+        seq, id, ref, step, depth, title, content, createdat, del, readcount
+        FROM bulletinboard
+        <if test="choice != null and choice != ''and search != null and search != '' ">
+            <where>
+                <if test="choice == 'title'">
+                     title LIKE concat('%', #{search}, '%')
+                </if>
+                <if test="choice == 'content'">
+                     content LIKE concat('%', #{search}, '%')
+                </if>
+                <if test="choice == 'writer'">
+                     id=#{search}
+                </if>
+            </where>
+		</if>
+        ORDER BY ref DESC, step ASC) as t
+		WHERE t.RowNumber BETWEEN ${pageStart} AND ${pageEnd} 
+		
+	</select>
+
+
+	<select id="getBulCountboard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CountParam" resultType="java.lang.Integer">
+	
+		SELECT ifnull(count(*),0) FROM bulletinboard 
+        <if test="choice != null and choice != '' and search != null and search != '' ">
+        <where>
+			<if test="choice == 'title'">
+				 title LIKE concat('%', #{search}, '%')
+			</if>
+			<if test="choice == 'content'">
+				 content LIKE concat('%', #{search}, '%')
+			</if>
+			<if test="choice == 'writer'">
+				 id=#{search}
+			</if>
+        </where>
+		</if>
+			
+	</select>
+
+
+	<!-- <insert id="createBulboard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBulletinBoardParam"
+		useGeneratedKeys="true" keyProperty="seq">
+		INSERT bulletinboard (id, ref, step, depth, title, content, created_at, del, read_count)
+		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard b), 0, 0, #{title}, #{content}, NOW(), 0, 0)
+	</insert> -->
+
+
+</mapper>

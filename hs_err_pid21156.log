@@ -1,0 +1,219 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 268435456 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3559), pid=21156, tid=5820
+#
+# JRE version:  (17.0.7+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.7+7, mixed mode, emulated-client, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m -Dsts.lsp.client=vscode -Dsts.log.file=/dev/null -XX:TieredStopAtLevel=1 -Xlog:jni+resolve=off -Dspring.config.location=file:c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\classes\application.properties org.springframework.ide.vscode.boot.app.BootLanguageServerBootApp
+
+Host: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz, 8 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.3031)
+Time: Sun Jun 25 15:40:25 2023  Windows 10 , 64 bit Build 19041 (10.0.19041.3031) elapsed time: 0.286081 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000165cbdb1da0):  JavaThread "Unknown thread" [_thread_in_vm, id=5820, stack(0x00000023d3e00000,0x00000023d3f00000)]
+
+Stack: [0x00000023d3e00000,0x00000023d3f00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x67754a]
+V  [jvm.dll+0x834304]
+V  [jvm.dll+0x835aae]
+V  [jvm.dll+0x836113]
+V  [jvm.dll+0x24696f]
+V  [jvm.dll+0x6743f9]
+V  [jvm.dll+0x668c8a]
+V  [jvm.dll+0x3061bb]
+V  [jvm.dll+0x30d6a6]
+V  [jvm.dll+0x35cece]
+V  [jvm.dll+0x35d0ff]
+V  [jvm.dll+0x2dd048]
+V  [jvm.dll+0x2ddfb4]
+V  [jvm.dll+0x8066d1]
+V  [jvm.dll+0x36ac91]
+V  [jvm.dll+0x7e5cec]
+V  [jvm.dll+0x3ed56f]
+V  [jvm.dll+0x3ef0a1]
+C  [jli.dll+0x528b]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17614]
+C  [ntdll.dll+0x526f1]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffddf997018, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00000165cbdf08e0 GCTaskThread "GC Thread#0" [stack: 0x00000023d3f00000,0x00000023d4000000] [id=29652]
+  0x00000165cbdf9820 ConcurrentGCThread "G1 Main Marker" [stack: 0x00000023d4000000,0x00000023d4100000] [id=15936]
+  0x00000165cbdfa230 ConcurrentGCThread "G1 Conc#0" [stack: 0x00000023d4100000,0x00000023d4200000] [id=27816]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffddf16daf7]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000165cbdad570] Heap_lock - owner thread: 0x00000165cbdb1da0
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffddf550db9]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.084 Loaded shared library c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff6d84f0000 - 0x00007ff6d84fe000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\java.exe
+0x00007ffe28ab0000 - 0x00007ffe28ca8000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffe27ce0000 - 0x00007ffe27d9f000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffe262a0000 - 0x00007ffe26596000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffe26890000 - 0x00007ffe26990000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffe07480000 - 0x00007ffe07497000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\jli.dll
+0x00007ffe26db0000 - 0x00007ffe26f4d000 	C:\Windows\System32\USER32.dll
+0x00007ffe26190000 - 0x00007ffe261b2000 	C:\Windows\System32\win32u.dll
+0x00007ffe27db0000 - 0x00007ffe27ddc000 	C:\Windows\System32\GDI32.dll
+0x00007ffe26770000 - 0x00007ffe26885000 	C:\Windows\System32\gdi32full.dll
+0x00007ffe26990000 - 0x00007ffe26a2d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffe07160000 - 0x00007ffe07179000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\VCRUNTIME140.dll
+0x00007ffe17530000 - 0x00007ffe177ca000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffe26c40000 - 0x00007ffe26cde000 	C:\Windows\System32\msvcrt.dll
+0x00007ffe26ce0000 - 0x00007ffe26d10000 	C:\Windows\System32\IMM32.DLL
+0x00007ffe186b0000 - 0x00007ffe186bc000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\vcruntime140_1.dll
+0x00007ffdebd90000 - 0x00007ffdebe21000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\msvcp140.dll
+0x00007ffddee80000 - 0x00007ffddfac8000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\server\jvm.dll
+0x00007ffe289c0000 - 0x00007ffe28a6f000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffe26d10000 - 0x00007ffe26dac000 	C:\Windows\System32\sechost.dll
+0x00007ffe26fe0000 - 0x00007ffe27106000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffe11de0000 - 0x00007ffe11de9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffe27df0000 - 0x00007ffe27e5b000 	C:\Windows\System32\WS2_32.dll
+0x00007ffe17e40000 - 0x00007ffe17e67000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffe1e8b0000 - 0x00007ffe1e8ba000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffe249d0000 - 0x00007ffe249e2000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffe183f0000 - 0x00007ffe183fa000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\jimage.dll
+0x00007ffe23d90000 - 0x00007ffe23f74000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffe131f0000 - 0x00007ffe13224000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffe26a30000 - 0x00007ffe26ab2000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffe00310000 - 0x00007ffe00335000 	c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e;c:\Users\tjdng\.vscode\extensions\redhat.java-1.19.0-win32-x64\jre\17.0.7-win32-x86_64\bin\server
+
+VM Arguments:
+jvm_args: -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m -Dsts.lsp.client=vscode -Dsts.log.file=/dev/null -XX:TieredStopAtLevel=1 -Xlog:jni+resolve=off -Dspring.config.location=file:c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\classes\application.properties 
+java_command: org.springframework.ide.vscode.boot.app.BootLanguageServerBootApp
+java_class_path (initial): c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\classes;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\annotations-24.0.1.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\antlr-runtime-3.5.3.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\antlr4-4.11.1.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\antlr4-runtime-4.11.1.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\aopalliance-1.0.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-9.5.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-analysis-9.5.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-tree-9.5.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-util-9.5.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\auto-common-1.2.1.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\auto-value-annotations-1.9.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\caffeine-3.1.2.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\checker-qual-3.12.0.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\classgraph-4.8.149.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\commons-codec-1.15.jar;c:\Users\tjdng\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\commons-compres
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+     bool HeapDumpOnOutOfMemoryError               = true                                   {manageable} {command line}
+   size_t InitialHeapSize                          = 268435456                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 0                                      {pd product} {ergonomic}
+     bool ProfileInterpreter                       = false                                  {pd product} {command line}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     intx TieredStopAtLevel                        = 1                                         {product} {command line}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning,jni+resolve=off uptime,level,tags (reconfigured)
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-17.0.5
+PATH=C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\PuTTY\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tjdng\AppData\Local\Microsoft\WindowsApps;C:\Users\tjdng\.dotnet\tools;C:\Users\tjdng\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tjdng\AppData\Roaming\npm
+USERNAME=tjdng
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+TMP=C:\Users\tjdng\AppData\Local\Temp
+TEMP=C:\Users\tjdng\AppData\Local\Temp
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.3031)
+OS uptime: 3 days 19:09 hours
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 158 stepping 9 microcode 0xb4, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt
+
+Memory: 4k page, system-wide physical 16304M (2465M free)
+TotalPageFile size 46748M (AvailPageFile size 22M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 54M, peak: 310M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.7+7) for windows-amd64 JRE (17.0.7+7), built on Apr 18 2023 22:10:42 by "temurin" with MS VC++ 16.7 (VS2019)
+
+END.

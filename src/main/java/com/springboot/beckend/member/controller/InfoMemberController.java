@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.springboot.beckend.jwt.JwtTokenUtil;
-import com.springboot.beckend.member.dao.InfoMemberDao;
-import com.springboot.beckend.member.dto.param.CreateInfoMemberParam;
 import com.springboot.beckend.member.dto.request.JoinRequest;
 import com.springboot.beckend.member.dto.request.LoginRequest;
 import com.springboot.beckend.member.dto.response.JoinResponse;
@@ -25,9 +21,12 @@ import com.springboot.beckend.member.dto.response.LoginResponse;
 import com.springboot.beckend.member.exception.InfoMemberException;
 import com.springboot.beckend.member.service.InfoMemberService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "InfoMemberController", description = "회원정보")
 public class InfoMemberController {
 
 	private final InfoMemberService service;
@@ -46,6 +45,7 @@ public class InfoMemberController {
 
 	@PostMapping("/join")
 	public ResponseEntity<JoinResponse> join(@Valid @RequestBody JoinRequest req) {
+		System.out.println(req.getCheckPwd());
 		System.out.println("UserController join " + new Date());
 
 		return ResponseEntity.ok(service.join(req));
