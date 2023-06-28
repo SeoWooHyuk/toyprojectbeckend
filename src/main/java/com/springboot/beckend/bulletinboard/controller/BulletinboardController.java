@@ -1,22 +1,26 @@
 package com.springboot.beckend.bulletinboard.controller;
 
 import java.util.Date;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
+import com.springboot.beckend.bulletinboard.dto.response.BulletinboardResponse;
 import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
+import com.springboot.beckend.bulletinboard.dto.response.DeleteBullinboardResponse;
 import com.springboot.beckend.bulletinboard.service.BulletinboardService;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/bulletinboard")
@@ -29,6 +33,7 @@ public class BulletinboardController {
         this.service = service;
     }
 
+    //전체게시글조회
    	@GetMapping
     public ResponseEntity<BulletinboardListResponse> getbulboardList(@ModelAttribute BulletinboardListRequest req)
     {
@@ -36,14 +41,34 @@ public class BulletinboardController {
         return ResponseEntity.ok(service.getBulboardList(req));
     }
 
-    @PostMapping
-    public ResponseEntity<CreateBullinboardResponse> CreateBulBoard(@Valid @RequestBody CreateBullinboardRequest req)
+    //상세게시글조회
+   	@GetMapping("/{seq}")
+    public ResponseEntity<BulletinboardResponse> getbulletinboard(@PathVariable Integer seq)
     {
-        System.out.println(req.getTitle());
-        System.out.println(req.getId());
-        System.out.println("BulletinboardController CreateBulBoard() " + new Date());
-        // return ResponseEntity.ok(service.CreateBulBoard(req));
-        return ResponseEntity.ok(null);
+        System.out.println(seq);
+        System.out.println("BulletinboardController getbulboard() " + new Date());
+        return ResponseEntity.ok(service.getbulletinboard(seq));
     }
+
+
+    //게시글 생성
+    @PostMapping
+    public ResponseEntity<CreateBullinboardResponse> CreateBulBoard(@RequestBody CreateBullinboardRequest req)
+    {
+        System.out.println("BulletinboardController CreateBulBoard() " + new Date());
+
+        return ResponseEntity.ok(service.createBulBoard(req));
+    }
+
+    //게시글삭제
+    @DeleteMapping("/{seq}")
+    public ResponseEntity<DeleteBullinboardResponse> deleteBulBoard(@PathVariable Integer seq)
+    {
+           System.out.println("BulletinboardController deleteBulBoard() " + new Date());
+           
+           return ResponseEntity.ok(service.deleteBulBoard(seq));
+    }
+
+    
    
 }

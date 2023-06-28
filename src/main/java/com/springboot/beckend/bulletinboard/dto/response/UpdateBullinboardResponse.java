@@ -5,16 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateBullinboardResponse {
+public class UpdateBullinboardResponse {
     
     private Integer seq; //게시판 번호
 
-    public CreateBullinboardResponse(Integer seq) {
+    public UpdateBullinboardResponse(Integer seq) {
         this.seq = seq;
     }
-
-  
-
-    
-      
 }

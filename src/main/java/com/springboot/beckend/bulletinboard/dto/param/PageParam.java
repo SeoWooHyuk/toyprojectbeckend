@@ -1,25 +1,14 @@
 package com.springboot.beckend.bulletinboard.dto.param;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class PageParam {
 
     private Integer pageStart;
     private Integer pageEnd;
-
-    public Integer getPageStart() {
-        return pageStart;
-    }
-
-    public void setPageStart(Integer pageStart) {
-        this.pageStart = pageStart;
-    }
-
-    public Integer getPageEnd() {
-        return pageEnd;
-    }
-
-    public void setPageEnd(Integer pageEnd) {
-        this.pageEnd = pageEnd;
-    }
 
     public void setPageParam(Integer page, Integer itemCount) {
         page -= 1;

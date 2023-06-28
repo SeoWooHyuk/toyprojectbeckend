@@ -1,5 +1,10 @@
 package com.springboot.beckend.bulletinboard.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Bulletinboard {
 
     private int seq; //게시판 번호
@@ -14,9 +19,8 @@ public class Bulletinboard {
 	private int readCount; // 조회수
     private String files;  //첨부파일 이름
 
-    public Bulletinboard(){};
-
-
+    public Bulletinboard(){
+    };
 
     public Bulletinboard(int seq, String id, int ref, int step, int depth, String title, String content,
             String createdAt, int del, int readCount, String files) {
@@ -34,8 +38,6 @@ public class Bulletinboard {
         this.files = files;
     }
 
-
-
     public Bulletinboard(String id, String title, String content, String files) {
         super();
         this.id = id;
@@ -44,98 +46,10 @@ public class Bulletinboard {
         this.files = files;
     }
 
-    public int getSeq() {
-        return seq;
-    }
-
-    public void setSeq(int seq) {
-        this.seq = seq;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getRef() {
-        return ref;
-    }
-
-    public void setRef(int ref) {
-        this.ref = ref;
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
-    }
-
-    public int getDepth() {
-        return depth;
-    }
-
-    public void setDepth(int depth) {
-        this.depth = depth;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public int getDel() {
-        return del;
-    }
-
-    public void setDel(int del) {
-        this.del = del;
-    }
-
-    public int getReadCount() {
-        return readCount;
-    }
-
-    public void setReadCount(int readCount) {
-        this.readCount = readCount;
-    }
-
-    public String getFiles() {
-        return files;
-    }
-
-    public void setFiles(String files) {
-        this.files = files;
-    }
-
-    
+   
     @Override
 	public String toString() {
-		return "BulboardDto [seq=" + seq + ", id=" + id + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", title="
+		return "BulletinboardDto [seq=" + seq + ", id=" + id + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", title="
 				+ title + ", content=" + content + ", createdAt=" + createdAt + ", del=" + del + ", readCount=" + readCount + ", files=" + files 
 				+  "]";
 	}

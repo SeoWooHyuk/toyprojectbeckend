@@ -2,7 +2,6 @@ package com.springboot.beckend.member.controller;
 
 import java.util.Date;
 import jakarta.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,7 +19,6 @@ import com.springboot.beckend.member.dto.response.JoinResponse;
 import com.springboot.beckend.member.dto.response.LoginResponse;
 import com.springboot.beckend.member.exception.InfoMemberException;
 import com.springboot.beckend.member.service.InfoMemberService;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
@@ -49,12 +47,12 @@ public class InfoMemberController {
 		System.out.println("UserController join " + new Date());
 
 		return ResponseEntity.ok(service.join(req));
+
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest req) {
 		System.out.println("UserController login " + new Date());
-
 		return ResponseEntity.ok(service.login(req));
 	}
 

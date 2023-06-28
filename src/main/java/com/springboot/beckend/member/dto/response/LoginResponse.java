@@ -1,5 +1,10 @@
 package com.springboot.beckend.member.dto.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LoginResponse {
 
     private String jwt;
@@ -10,19 +15,4 @@ public class LoginResponse {
         this.id = id;
     }
 
-    public String getJwt() {
-        return jwt;
-    }
-
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

@@ -18,8 +18,20 @@ public interface BulletinboardDao {
     public List<Bulletinboard> getBulSearchboardList(BulletinboardListParam  param);
     public Integer getBulCountboard(CountParam param);
 
+    //게시글 상세페이지 출력
+    public Bulletinboard getbulletinboard(Integer seq);
+
     //게시판 생성
-    public void CreateBulBoard(CreateBullinboardParam param);
+    public void createBulBoard(CreateBullinboardParam param);
+
+    //게시글 삭제 필드에 1이면 나중에 스케쥴러사용 지정한 시간대에 일괄삭제 한다.
+    Integer deleteBulBoard(Integer seq);
+
+
+    Integer updateBulBoard(Integer seq);
+
+
+     
 
 
 

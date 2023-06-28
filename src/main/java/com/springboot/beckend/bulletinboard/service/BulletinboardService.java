@@ -13,7 +13,10 @@ import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
+import com.springboot.beckend.bulletinboard.dto.response.BulletinboardResponse;
 import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
+import com.springboot.beckend.bulletinboard.dto.response.DeleteBullinboardResponse;
+import com.springboot.beckend.bulletinboard.dto.response.UpdateBullinboardResponse;
 
 
 
@@ -27,6 +30,7 @@ public class BulletinboardService {
         this.dao = dao;
     }
 
+    //게시글 전체출력
     public BulletinboardListResponse getBulboardList(BulletinboardListRequest req) {
 
     
@@ -51,10 +55,39 @@ public class BulletinboardService {
 	
 	}
 
-    public CreateBullinboardResponse CreateBulBoard(CreateBullinboardRequest req)
+    //게시글 상세
+     public BulletinboardResponse getbulletinboard(Integer seq)
+     {
+      
+        System.out.println("게시글 상세 "+ seq);
+        return new BulletinboardResponse(dao.getbulletinboard(seq));
+     }
+
+    //게시글 생성
+    public CreateBullinboardResponse createBulBoard(CreateBullinboardRequest req)
     {
         CreateBullinboardParam param = new CreateBullinboardParam(req);
+        dao.createBulBoard(param);
         return new CreateBullinboardResponse(param.getSeq());
-    } 
+    }
+    
+    //  //게시글 서정
+    // public UpdateBullinboardResponse updateBulBoard(CreateBullinboardRequest req)
+    // {
+       
+    // } 
+
+    
+    //게시글 삭제
+    public DeleteBullinboardResponse deleteBulBoard(Integer seq)
+    {
+        Integer deletecheck = dao.deleteBulBoard(seq);
+        return new DeleteBullinboardResponse(deletecheck);
+    }
+
+    
+
+
+
     
 }
