@@ -9,6 +9,8 @@ import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
+import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
+import com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam;
 
 @Mapper
 @Repository
@@ -28,7 +30,11 @@ public interface BulletinboardDao {
     Integer deleteBulBoard(Integer seq);
 
 
-    Integer updateBulBoard(Integer seq);
+    //게시글 수정
+    Integer updateBulBoard(UpdateBullinboardParam param);
+
+    //답글생성
+    void createBulBoardReply(CreateBullinboardReplyParam param);
 
 
      

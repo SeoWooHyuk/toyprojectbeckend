@@ -10,8 +10,12 @@ import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
+import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
+import com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
+import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
+import com.springboot.beckend.bulletinboard.dto.request.UpdateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardResponse;
 import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
@@ -71,11 +75,13 @@ public class BulletinboardService {
         return new CreateBullinboardResponse(param.getSeq());
     }
     
-    //  //게시글 서정
-    // public UpdateBullinboardResponse updateBulBoard(CreateBullinboardRequest req)
-    // {
-       
-    // } 
+    //게시글 수정
+    public UpdateBullinboardResponse updateBulBoard(Integer seq, UpdateBullinboardRequest req)
+    {
+        UpdateBullinboardParam param = new UpdateBullinboardParam(seq,req);
+        dao.updateBulBoard(param);
+       return new UpdateBullinboardResponse(param.getSeq());
+    } 
 
     
     //게시글 삭제
@@ -85,6 +91,16 @@ public class BulletinboardService {
         return new DeleteBullinboardResponse(deletecheck);
     }
 
+    //게시글 댓글달기
+    public CreateBullinboardResponse createBulBoardReply(Integer parentseq, CreateBullinboardReplyRequest req)
+    {
+        CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(parentseq, req);
+        System.out.println(param.getParentSeq());
+        System.out.println(param.getSeq());
+        System.out.println(param.getId());
+        dao.createBulBoardReply(param);
+        return new CreateBullinboardResponse(param.getSeq());
+    }
     
 
 

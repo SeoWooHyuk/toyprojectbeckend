@@ -16,7 +16,8 @@ public class UpdateBullinboardParam {
     private String files;  //첨부파일 이름
 
 
-    public UpdateBullinboardParam(UpdateBullinboardRequest req) {
+    public UpdateBullinboardParam(Integer seq,  UpdateBullinboardRequest req) {
+        this.seq = seq;
         this.title = req.getTitle();
         this.content = req.getContent();
         this.files = req.getFiles();

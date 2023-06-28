@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<select id="getbulletinboard" parameterType="Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
+	<select id="getbulletinboard" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
 		SELECT seq, id, ref, step, depth, title, content,  createdAt, del, readCount
 		FROM bulletinboard
 		WHERE seq=#{seq}
@@ -58,17 +58,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<insert id="CreateBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam"
+	<insert id="createBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam"
 		useGeneratedKeys="true" keyProperty="seq">
 		INSERT bulletinboard (id, ref, step, depth, title, content, createdat, del, readcount)
-		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard b), 0, 0, #{title}, #{content}, NOW(), 0, 0)
+		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard testboard), 0, 0, #{title}, #{content}, NOW(), 0, 0)
 	</insert>
 
-	<update id="deleteBulBoard" parameterType="Integer">
+	<update id="updateBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam">
+		UPDATE bulletinboard SET title=#{title} , content=#{content}, files=#{files} WHERE seq=#{seq};
+	</update>
+
+
+	<update id="deleteBulBoard" parameterType="java.lang.Integer">
 		UPDATE bulletinboard
 		SET del = 1
 		WHERE seq=#{seq}
 	</update>
+
+
+	<insert id="createBulBoardReply" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam"
+				useGeneratedKeys="true" keyProperty="seq">
+		INSERT INTO bulletinboard (id, ref, step, depth, title, content, createdat, del, readcount)
+		VALUES (#{id}, (SELECT ref FROM bulletinboard a WHERE seq=#{parentSeq}),
+						(SELECT step FROM bulletinboard b WHERE seq=#{parentSeq}) + 1,
+						(SELECT depth FROM bulletinboard c WHERE seq=#{parentSeq}) + 1,
+						#{title}, #{content}, NOW(), 0, 0);
+	</insert>
+
+
+
 
 
 </mapper>
