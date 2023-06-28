@@ -12,10 +12,5 @@ public class ReststudyApplication {
 		SpringApplication.run(ReststudyApplication.class, args);
 	}
 
-	@Bean
-	MappingJackson2JsonView jsonView()
-	{
-		return new MappingJackson2JsonView();
-	}
-
+	
 }

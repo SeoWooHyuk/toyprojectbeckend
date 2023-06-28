@@ -14,7 +14,6 @@ public class BulletinboardResponse {
     public BulletinboardResponse(Bulletinboard bulletinboard) {
 
         this.bulletinboard = bulletinboard;
-         System.out.println(bulletinboard.getSeq());
     }
 
 }

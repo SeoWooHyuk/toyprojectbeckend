@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.springboot.beckend.bulletinboard.dao.BulletinboardDao"> 
 	
+	<!-- 전체게시글출력 -->
 	<select id="getBulSearchboardList" parameterType="com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam" 
 		resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
 		SELECT *
@@ -29,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 
-
+	<!-- 페이징처리용 검색시 게시글 카운트 -->
 	<select id="getBulCountboard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CountParam" resultType="java.lang.Integer">
 	
 		SELECT ifnull(count(*),0) FROM bulletinboard 
@@ -50,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<!-- 상세게시글조회 -->
 	<select id="getbulletinboard" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
 		SELECT seq, id, ref, step, depth, title, content,  createdAt, del, readCount
 		FROM bulletinboard
@@ -58,17 +60,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<!-- 게시글 등록 -->
 	<insert id="createBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam"
 		useGeneratedKeys="true" keyProperty="seq">
 		INSERT bulletinboard (id, ref, step, depth, title, content, createdat, del, readcount)
 		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard testboard), 0, 0, #{title}, #{content}, NOW(), 0, 0)
 	</insert>
 
+
+	<!-- 게시글수정 -->
 	<update id="updateBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam">
 		UPDATE bulletinboard SET title=#{title} , content=#{content}, files=#{files} WHERE seq=#{seq};
 	</update>
 
-
+	<!-- 게시글 논리적 삭제 -->
 	<update id="deleteBulBoard" parameterType="java.lang.Integer">
 		UPDATE bulletinboard
 		SET del = 1
@@ -76,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
+	<!-- 게시글 댓글 -->
 	<insert id="createBulBoardReply" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam"
 				useGeneratedKeys="true" keyProperty="seq">
 		INSERT INTO bulletinboard (id, ref, step, depth, title, content, createdat, del, readcount)
@@ -85,6 +91,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						#{title}, #{content}, NOW(), 0, 0);
 	</insert>
 
+	<!-- 게시글 접속자 접속시간확인 조회시 레코드저장 아이디값이 같은게 중복될시 그아이디값의 열은 지금날짜로 수정해라 -->
+	<insert id="createBulBoardReadCountHistory" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateReadCountPram">
+		INSERT INTO readcountview (seq, id, latest_access_at) VALUES (#{seq}, #{readerId}, NOW())
+		ON DUPLICATE KEY 
+		UPDATE latest_access_at=NOW();
+	</insert>
+
+	<!-- 게시글 조회수 증가 카운트 수정 -->
+	<update id="increaseBulBoardReadCount" parameterType="java.lang.Integer">
+		UPDATE bulletinboard
+		SET readcount = readcount + 1
+		WHERE seq = #{seq}
+	</update>
 
 
 

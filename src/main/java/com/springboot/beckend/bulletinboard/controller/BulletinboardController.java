@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
@@ -47,11 +48,11 @@ public class BulletinboardController {
 
     //상세게시글조회
    	@GetMapping("/{seq}")
-    public ResponseEntity<BulletinboardResponse> getbulletinboard(@PathVariable Integer seq)
+    public ResponseEntity<BulletinboardResponse> getbulletinboard(@PathVariable Integer seq, @RequestParam String readerId)
     {
-        System.out.println(seq);
         System.out.println("BulletinboardController getbulboard() " + new Date());
-        return ResponseEntity.ok(service.getbulletinboard(seq));
+        
+        return ResponseEntity.ok(service.getbulletinboard(seq,readerId));
     }
 
 
@@ -82,7 +83,7 @@ public class BulletinboardController {
            return ResponseEntity.ok(service.deleteBulBoard(seq));
     }
 
-    //게시글답글
+    //게시글댓글
     @PostMapping("/{parentseq}/reply")
     public ResponseEntity<CreateBullinboardResponse> createBulBoardReply(@PathVariable Integer parentseq, @RequestBody CreateBullinboardReplyRequest req)
     {

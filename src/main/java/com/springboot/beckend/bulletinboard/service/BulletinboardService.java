@@ -11,6 +11,7 @@ import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
+import com.springboot.beckend.bulletinboard.dto.param.CreateReadCountPram;
 import com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
@@ -60,10 +61,18 @@ public class BulletinboardService {
 	}
 
     //게시글 상세
-     public BulletinboardResponse getbulletinboard(Integer seq)
+     public BulletinboardResponse getbulletinboard(Integer seq, String readerId)
      {
-      
-        System.out.println("게시글 상세 "+ seq);
+        CreateReadCountPram param = new CreateReadCountPram(seq, readerId);
+        System.out.println(readerId);
+
+
+        Integer check =  dao.createBulBoardReadCountHistory(param); //sql 문으로 ON DUPLICATE KEY pk값이 사용하여 중복되지않는값은 인설트되어 1출력 중복이되는 키값이있으면 업데이트되어 2출력
+        System.out.println(check);
+        if(check == 1) //1이 여지만 중복되는 키값이 없다는 뜻으로 조회수를 증가시킨다.
+        {
+            dao.increaseBulBoardReadCount(seq);
+        }
         return new BulletinboardResponse(dao.getbulletinboard(seq));
      }
 
@@ -95,9 +104,6 @@ public class BulletinboardService {
     public CreateBullinboardResponse createBulBoardReply(Integer parentseq, CreateBullinboardReplyRequest req)
     {
         CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(parentseq, req);
-        System.out.println(param.getParentSeq());
-        System.out.println(param.getSeq());
-        System.out.println(param.getId());
         dao.createBulBoardReply(param);
         return new CreateBullinboardResponse(param.getSeq());
     }
