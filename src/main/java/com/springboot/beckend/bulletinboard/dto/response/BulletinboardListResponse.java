@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BulletinboardListResponse {
 
     private List<Bulletinboard> bsList;
@@ -13,22 +18,5 @@ public class BulletinboardListResponse {
         this.bsList = bsList;
         this.pageCnt = pageCnt;
     }
-
-    public List<Bulletinboard> getBsList() {
-        return bsList;
-    }
-
-    public void setBsList(List<Bulletinboard> bsList) {
-        this.bsList = bsList;
-    }
-
-    public Integer getPageCnt() {
-        return pageCnt;
-    }
-
-    public void setPageCnt(Integer pageCnt) {
-        this.pageCnt = pageCnt;
-    }
-    
 
 }

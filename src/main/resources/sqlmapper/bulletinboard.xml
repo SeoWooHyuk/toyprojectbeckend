@@ -80,6 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 
+
 	<!-- 게시글수정 -->
 	<update id="updateBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam">
 		UPDATE bulletinboard SET title=#{title} , content=#{content}, files=#{files} WHERE seq=#{seq};
@@ -95,9 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--상세 게시글 댓글작성 -->
 	<insert id="createBulBoardReply" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam"
-				useGeneratedKeys="true" keyProperty="seq">
-	    INSERT bulletinboardreply (seq, id, ref, step, depth, title, content, createdat, del)
-		VALUES (#{seq}, #{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard testboard), 0, 0, #{title}, #{content}, NOW(), 0)
+	useGeneratedKeys="true" keyProperty="replynum">
+	    INSERT bulletinboardreply (seq, id, ref, step, depth, content, createdat, del)
+		VALUES (#{seq}, #{id}, (SELECT ifnull(max(ref), 0)+1 as ref from bulletinboardreply test), 0, 0, #{content}, NOW(), 0)
 	</insert>
 
 	<!-- 상세게시글 댓글 출력 -->
@@ -120,20 +121,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert> -->
 
 	<!-- 부모 게시글 step 업데이트 -->
-	<update id="updateBulBoardReplyStep" parameterType="Integer">
+	<!-- <update id="updateBulBoardReplyStep" parameterType="Integer">
 		UPDATE bulletinboard
 		SET step = step + 1
 		WHERE ref = (SELECT ref FROM (SELECT ref FROM bulletinboard a WHERE seq=#{parentSeq}) A)
 		AND step > (SELECT step FROM (SELECT step FROM bulletinboard b WHERE seq=#{parentSeq}) B)
-	</update>
+	</update> -->
 
 	<!-- 부모 게시글 하위 답글 개수 조회 (step 업데이트 성공 여부 확인 휘함) -->
-	<select id="getBulBoardReplyCount" parameterType="Integer" resultType="Integer">
+	<!-- <select id="getBulBoardReplyCount" parameterType="Integer" resultType="Integer">
 		SELECT COUNT(*)
 		FROM bulletinboard
 		WHERE ref = (SELECT ref FROM (SELECT ref FROM bulletinboard a WHERE seq=#{parentSeq}) A)
 		AND step > (SELECT step FROM (SELECT step FROM bulletinboard b WHERE seq=#{parentSeq}) B)
-	</select>
+	</select> -->
 
 	
 

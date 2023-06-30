@@ -8,6 +8,5 @@ import lombok.Setter;
 public class CreateBullinboardReplyRequest {
 
     private String id;
-    private String title;
     private String content;
 }

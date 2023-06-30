@@ -15,7 +15,6 @@ public class BulletinboardListReplyResponse {
 
      public BulletinboardListReplyResponse(List<Bulletinboard> bsReplyList) {
         this.bsReplyList = bsReplyList;
-       
     }
 
 }

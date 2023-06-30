@@ -9,16 +9,16 @@ import lombok.Setter;
 @Setter
 public class CreateBullinboardReplyParam {
 
+    private Integer replynum;
     private Integer seq;
-    private Integer parentSeq;
     private String id;
     private String title;
     private String content;
     
     public CreateBullinboardReplyParam(Integer seq,CreateBullinboardReplyRequest req) {
+        this.seq = replynum;
         this.seq = seq;
         this.id = req.getId();
-        this.title = req.getTitle();
         this.content = req.getContent();
     }
 
