@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateBullinboardReplyParam {
+public class CreateBullinboardReplyParambackup {
 
     private Integer seq;
     private Integer parentSeq;
@@ -15,8 +15,8 @@ public class CreateBullinboardReplyParam {
     private String title;
     private String content;
     
-    public CreateBullinboardReplyParam(Integer seq,CreateBullinboardReplyRequest req) {
-        this.seq = seq;
+    public CreateBullinboardReplyParambackup(Integer parentSeq,CreateBullinboardReplyRequest req) {
+        this.parentSeq = parentSeq;
         this.id = req.getId();
         this.title = req.getTitle();
         this.content = req.getContent();

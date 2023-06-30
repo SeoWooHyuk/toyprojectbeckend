@@ -18,6 +18,7 @@ import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.request.UpdateBullinboardRequest;
+import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListReplyResponse;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardResponse;
 import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
@@ -104,25 +105,46 @@ public class BulletinboardService {
         return new DeleteBullinboardResponse(deletecheck);
     }
 
-    //게시글 댓글달기
-    public CreateBullinboardResponse createBulBoardReply(Integer parentseq, CreateBullinboardReplyRequest req)
+    //게시글 댓글 생성
+    public CreateBullinboardResponse createBulBoardReply(Integer seq, CreateBullinboardReplyRequest req)
     {
-        Integer stepcount =  dao.updateBulBoardReplyStep(parentseq);
-        Integer replycount = dao.getBulBoardReplyCount(parentseq);
-
-        System.out.println(stepcount);
-        System.out.println(replycount);
-
-        	// TODO - 예외처리
-		if (!Objects.equals(stepcount, replycount)) {
-			System.out.println("BbsService createBbsAnswer: Fail update parent bbs step !!");
-			return null;
-		}
-
-        CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(parentseq, req);
+        CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(seq, req);
         dao.createBulBoardReply(param);
         return new CreateBullinboardResponse(param.getSeq());
     }
+
+
+    //게시글 댓글 출력
+    public BulletinboardListReplyResponse getBulBoardReplyList(Integer seq)
+    {
+        List<Bulletinboard> bsreplyList = dao.getBulBoardReplyList(seq);
+
+        return new BulletinboardListReplyResponse(bsreplyList);
+    }
+
+
+
+
+
+    //게시글 댓글에 댓글달기
+    // public CreateBullinboardResponse createBulBoardReply2(Integer parentseq, CreateBullinboardReplyRequest req)
+    // {
+    //     Integer stepcount =  dao.updateBulBoardReplyStep(parentseq);
+    //     Integer replycount = dao.getBulBoardReplyCount(parentseq);
+
+    //     System.out.println(stepcount);
+    //     System.out.println(replycount);
+
+    //     	// TODO - 예외처리
+	// 	if (!Objects.equals(stepcount, replycount)) {
+	// 		System.out.println("BbsService createBbsAnswer: Fail update parent bbs step !!");
+	// 		return null;
+	// 	}
+
+    //     CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(parentseq, req);
+    //     dao.createBulBoardReply(param);
+    //     return new CreateBullinboardResponse(param.getSeq());
+    // }
     
 
 

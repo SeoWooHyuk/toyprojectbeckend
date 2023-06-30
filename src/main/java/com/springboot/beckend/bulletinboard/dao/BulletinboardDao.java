@@ -45,6 +45,10 @@ public interface BulletinboardDao {
     //답글생성
     public void createBulBoardReply(CreateBullinboardReplyParam param);
 
+    //댓글 출력
+    public List<Bulletinboard> getBulBoardReplyList(Integer seq);
+
+
     public Integer updateBulBoardReplyStep(Integer parentSeq);
 	public Integer getBulBoardReplyCount(Integer parentSeq);
 

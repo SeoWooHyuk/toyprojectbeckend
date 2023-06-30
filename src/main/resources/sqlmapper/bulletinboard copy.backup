@@ -75,8 +75,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 등록 -->
 	<insert id="createBulBoard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam"
 		useGeneratedKeys="true" keyProperty="seq">
-		INSERT bulletinboard (id, ref, step, depth, title, content, createdat, del, readCount, files)
-		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard testboard), 0, 0, #{title}, #{content}, NOW(), 0, 0, #{files})
+		INSERT bulletinboard (id, ref, step, depth, title, content, createdat, del, readCount)
+		VALUES (#{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard testboard), 0, 0, #{title}, #{content}, NOW(), 0, 0)
 	</insert>
 
 
@@ -93,31 +93,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
-	<!--상세 게시글 댓글작성 -->
-	<insert id="createBulBoardReply" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam"
-				useGeneratedKeys="true" keyProperty="seq">
-	    INSERT bulletinboardreply (seq, id, ref, step, depth, title, content, createdat, del)
-		VALUES (#{seq}, #{id}, (SELECT ifnull(max(ref), 0)+1 from bulletinboard testboard), 0, 0, #{title}, #{content}, NOW(), 0)
-	</insert>
-
-	<!-- 상세게시글 댓글 출력 -->
-	<select id="getBulBoardReplyList" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
-		SELECT seq, id, ref, step, depth, title, content,  createdAt, del
-		FROM bulletinboardreply
-		WHERE seq=#{seq}
-		ORDER BY ref DESC, step ASC
-	</select>
-
-
 	<!-- 게시글 댓글작성 -->
-	<!-- <insert id="createBulBoardReply" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam"
+	<insert id="createBulBoardReply" parameterType="com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam"
 				useGeneratedKeys="true" keyProperty="seq">
 		INSERT INTO bulletinboard (id, ref, step, depth, title, content, createdat, del, readcount)
 		VALUES (#{id}, (SELECT ref FROM bulletinboard a WHERE seq=#{parentSeq}),
 						(SELECT step FROM bulletinboard b WHERE seq=#{parentSeq}) + 1,
 						(SELECT depth FROM bulletinboard c WHERE seq=#{parentSeq}) + 1,
 						#{title}, #{content}, NOW(), 0, 0);
-	</insert> -->
+	</insert>
 
 	<!-- 부모 게시글 step 업데이트 -->
 	<update id="updateBulBoardReplyStep" parameterType="Integer">
