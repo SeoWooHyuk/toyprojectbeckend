@@ -40,10 +40,13 @@ public interface BulletinboardDao {
 
 
     //게시글 수정
-   public Integer updateBulBoard(UpdateBullinboardParam param);
+    public Integer updateBulBoard(UpdateBullinboardParam param);
 
     //답글생성
     public void createBulBoardReply(CreateBullinboardReplyParam param);
+
+    public Integer updateBulBoardReplyStep(Integer parentSeq);
+	public Integer getBulBoardReplyCount(Integer parentSeq);
 
 
 

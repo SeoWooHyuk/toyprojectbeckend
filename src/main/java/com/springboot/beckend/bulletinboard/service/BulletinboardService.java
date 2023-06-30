@@ -1,6 +1,7 @@
 package com.springboot.beckend.bulletinboard.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,17 +45,15 @@ public class BulletinboardService {
 
 		param.setPageParam(req.getPage(),10);
 
-        System.out.println(param.getPageStart() + "시작페이지");
-        System.out.println(param.getPageEnd() + "끝페이지");
         List<Bulletinboard> bsList = dao.getBulSearchboardList(param);
 
         Integer pageCnt = dao.getBulCountboard(countparam);
 
         System.out.println(bsList.size());
 
-        for (Bulletinboard item : bsList) {
-            System.out.println(item);
-        }
+        // for (Bulletinboard item : bsList) {
+        //     System.out.println(item);
+        // }
 
         return new BulletinboardListResponse(bsList, pageCnt);
 	
@@ -63,14 +62,19 @@ public class BulletinboardService {
     //게시글 상세
      public BulletinboardResponse getbulletinboard(Integer seq, String readerId)
      {
+
+        System.out.println("게시글상세 아이디"+readerId);
+        System.out.println("게시글 번호"+seq);
         CreateReadCountPram param = new CreateReadCountPram(seq, readerId);
-        System.out.println(readerId);
+        System.out.println(param.getReaderId());
+        System.out.println(param.getSeq());
 
 
         Integer check =  dao.createBulBoardReadCountHistory(param); //sql 문으로 ON DUPLICATE KEY pk값이 사용하여 중복되지않는값은 인설트되어 1출력 중복이되는 키값이있으면 업데이트되어 2출력
-        System.out.println(check);
+        System.out.println(check + "2가니오면 중복임");
         if(check == 1) //1이 여지만 중복되는 키값이 없다는 뜻으로 조회수를 증가시킨다.
         {
+            System.out.println("조회수 증가되는거?");
             dao.increaseBulBoardReadCount(seq);
         }
         return new BulletinboardResponse(dao.getbulletinboard(seq));
@@ -103,6 +107,18 @@ public class BulletinboardService {
     //게시글 댓글달기
     public CreateBullinboardResponse createBulBoardReply(Integer parentseq, CreateBullinboardReplyRequest req)
     {
+        Integer stepcount =  dao.updateBulBoardReplyStep(parentseq);
+        Integer replycount = dao.getBulBoardReplyCount(parentseq);
+
+        System.out.println(stepcount);
+        System.out.println(replycount);
+
+        	// TODO - 예외처리
+		if (!Objects.equals(stepcount, replycount)) {
+			System.out.println("BbsService createBbsAnswer: Fail update parent bbs step !!");
+			return null;
+		}
+
         CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(parentseq, req);
         dao.createBulBoardReply(param);
         return new CreateBullinboardResponse(param.getSeq());
