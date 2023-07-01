@@ -3,10 +3,12 @@ package com.springboot.beckend.bulletinboard.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
+import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListReplyParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
@@ -46,7 +48,7 @@ public interface BulletinboardDao {
     public void createBulBoardReply(CreateBullinboardReplyParam param);
 
     //게시글 댓글 출력
-    public List<Bulletinboard> getBulBoardReplyList(Integer seq);
+    public List<Bulletinboard> getBulBoardReplyList(@Param("seq")Integer seq , @Param("param")BulletinboardListReplyParam param);
 
 
     // public Integer updateBulBoardReplyStep(Integer parentSeq);

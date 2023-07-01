@@ -8,13 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BulletinboardListReplyParam extends PageParam{
-     private Integer page;
-    private Integer seq;
+    private Integer page;
 
-    public BulletinboardListReplyParam(Integer seq , BulletinboardListReplyRequest req) {
-
+    public BulletinboardListReplyParam(BulletinboardListReplyRequest req) {
         this.page = req.getPage();
-        this.seq = seq;
     }
 
      

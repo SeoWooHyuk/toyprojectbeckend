@@ -9,11 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.springboot.beckend.bulletinboard.dao.BulletinboardDao;
 import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
+import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListReplyParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateReadCountPram;
 import com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam;
+import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
@@ -115,11 +117,16 @@ public class BulletinboardService {
 
 
     //게시글 댓글 출력
-    public BulletinboardListReplyResponse getBulBoardReplyList(Integer seq)
+    public BulletinboardListReplyResponse getBulBoardReplyList(Integer seq, BulletinboardListReplyRequest req)
     {
-        List<Bulletinboard> bsreplyList = dao.getBulBoardReplyList(seq);
+        BulletinboardListReplyParam param = new BulletinboardListReplyParam(req);
+        param.setPageParam(req.getPage(),10);
 
-        return new BulletinboardListReplyResponse(bsreplyList);
+        System.out.println(param.getPageStart() + "페이징 스타트");
+
+        List<Bulletinboard> bsreplyList = dao.getBulBoardReplyList(seq,param);
+
+        return new BulletinboardListReplyResponse(bsreplyList, bsreplyList.size());
     }
 
 

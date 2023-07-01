@@ -31,7 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 페이징처리용 검색시 게시글 카운트 -->
-	<select id="getBulCountboard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CountParam" resultType="java.lang.Integer">
+	<select id="getBulCountboard" parameterType="com.springboot.beckend.bulletinboard.dto.param.CountParam"
+	 resultType="java.lang.Integer">
 	
 		SELECT ifnull(count(*),0) FROM bulletinboard  
         <if test="choice != null and choice != '' and search != null and search != '' ">
@@ -50,7 +51,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 상세게시글조회 -->
-	<select id="getbulletinboard" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
+	<select id="getbulletinboard" parameterType="java.lang.Integer" 
+	resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
 		SELECT seq, id, ref, step, depth, title, content,  createdAt, del, readCount
 		FROM bulletinboard
 		WHERE seq=#{seq}
@@ -102,12 +104,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<!-- 상세게시글 댓글 출력 -->
+	<select id="getBulBoardReplyList" parameterType="com.springboot.beckend.bulletinboard.dto.param.BulletinboardListReplyParam"
+	 resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
+	 	SELECT *
+		FROM  (SELECT row_number() OVER(ORDER BY ref DESC, step ASC) AS RowNumber,
+		seq, id, ref, step, depth, content,  createdAt, del
+		FROM bulletinboardreply WHERE seq=#{seq}
+		ORDER BY ref DESC, step ASC) as t
+		WHERE t.RowNumber BETWEEN ${param.pageStart} AND ${param.pageEnd}
+
+	</select>
+
+
+	<!-- 상세게시글 빽업
 	<select id="getBulBoardReplyList" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
 		SELECT seq, id, ref, step, depth, content,  createdAt, del
 		FROM bulletinboardreply
 		WHERE seq=#{seq}
 		ORDER BY ref DESC, step ASC
-	</select>
+	</select> -->
 
 
 	<!-- 게시글 댓글작성 -->

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
@@ -68,7 +70,8 @@ public class BulletinboardController {
 
     //게시글 수정
     @PutMapping("/{seq}")
-    public ResponseEntity<UpdateBullinboardResponse> updataeBulBoard(@PathVariable Integer seq , @RequestBody UpdateBullinboardRequest req)
+    public ResponseEntity<UpdateBullinboardResponse> updataeBulBoard(@PathVariable Integer seq , 
+    @RequestBody UpdateBullinboardRequest req)
     {
         System.out.println("BulletinboardController updataeBulBoard() " + new Date());
 
@@ -86,17 +89,21 @@ public class BulletinboardController {
 
     //게시글댓글 생성
     @PostMapping("/{seq}/reply")
-    public ResponseEntity<CreateBullinboardResponse> createBulBoardReply(@PathVariable Integer seq, @RequestBody CreateBullinboardReplyRequest req)
+    public ResponseEntity<CreateBullinboardResponse> createBulBoardReply(@PathVariable Integer seq, 
+    @RequestBody CreateBullinboardReplyRequest req)
     {
            System.out.println("BulletinboardController createBulBoardReply() " + new Date());
            return ResponseEntity.ok(service.createBulBoardReply(seq,req));
     }
 
+
+    //게시글 댓글출력
     @GetMapping("/{seq}/reply")
-    public ResponseEntity<BulletinboardListReplyResponse> getBulBoardReplyList(@PathVariable Integer seq)
+    public ResponseEntity<BulletinboardListReplyResponse> getBulBoardReplyList(@PathVariable Integer seq, 
+    @ModelAttribute BulletinboardListReplyRequest req)
     {
            System.out.println("BulletinboardController getBulBoardReplyList() " + new Date());
-           return ResponseEntity.ok(service.getBulBoardReplyList(seq));
+           return ResponseEntity.ok(service.getBulBoardReplyList(seq, req));
     }
 
     
