@@ -50,6 +50,8 @@ public interface BulletinboardDao {
     //게시글 댓글 출력
     public List<Bulletinboard> getBulBoardReplyList(@Param("seq")Integer seq , @Param("param")BulletinboardListReplyParam param);
 
+    //게시글 댓글 페이징용 카운트
+    public Integer getBulReplyCountboard(Integer seq);
 
     // public Integer updateBulBoardReplyStep(Integer parentSeq);
 	// public Integer getBulBoardReplyCount(Integer parentSeq);

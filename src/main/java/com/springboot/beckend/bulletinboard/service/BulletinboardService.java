@@ -122,11 +122,13 @@ public class BulletinboardService {
         BulletinboardListReplyParam param = new BulletinboardListReplyParam(req);
         param.setPageParam(req.getPage(),10);
 
+         Integer replycount =   dao.getBulReplyCountboard(seq);
+
         System.out.println(param.getPageStart() + "페이징 스타트");
 
         List<Bulletinboard> bsreplyList = dao.getBulBoardReplyList(seq,param);
 
-        return new BulletinboardListReplyResponse(bsreplyList, bsreplyList.size());
+        return new BulletinboardListReplyResponse(bsreplyList, replycount);
     }
 
 

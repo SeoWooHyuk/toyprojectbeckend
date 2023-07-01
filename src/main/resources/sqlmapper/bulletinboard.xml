@@ -116,6 +116,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+
+	<!-- 페이징처리용 검색시 게시글 카운트 -->
+	<select id="getBulReplyCountboard" parameterType="java.lang.Integer"
+	 resultType="java.lang.Integer">
+	
+		SELECT ifnull(count(*),0) FROM bulletinboardreply WHERE seq=#{seq}
+       
+	</select>
+
+
 	<!-- 상세게시글 빽업
 	<select id="getBulBoardReplyList" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
 		SELECT seq, id, ref, step, depth, content,  createdAt, del
