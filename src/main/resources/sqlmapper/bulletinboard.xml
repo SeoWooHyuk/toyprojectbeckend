@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 상세게시글 댓글 출력 -->
 	<select id="getBulBoardReplyList" parameterType="java.lang.Integer" resultType="com.springboot.beckend.bulletinboard.domain.Bulletinboard">
-		SELECT seq, id, ref, step, depth, title, content,  createdAt, del
+		SELECT seq, id, ref, step, depth, content,  createdAt, del
 		FROM bulletinboardreply
 		WHERE seq=#{seq}
 		ORDER BY ref DESC, step ASC

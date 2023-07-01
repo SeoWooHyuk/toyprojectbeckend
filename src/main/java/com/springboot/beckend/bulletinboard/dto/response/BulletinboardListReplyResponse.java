@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class BulletinboardListReplyResponse {
     private List<Bulletinboard> bsReplyList;
+    
 
 
      public BulletinboardListReplyResponse(List<Bulletinboard> bsReplyList) {
