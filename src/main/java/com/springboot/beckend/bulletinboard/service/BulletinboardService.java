@@ -121,8 +121,7 @@ public class BulletinboardService {
     {
         BulletinboardListReplyParam param = new BulletinboardListReplyParam(req);
         param.setPageParam(req.getPage(),10);
-
-         Integer replycount =   dao.getBulReplyCountboard(seq);
+           Integer replycount =   dao.getBulReplyCountboard(seq);
 
         System.out.println(param.getPageStart() + "페이징 스타트");
 
@@ -130,9 +129,6 @@ public class BulletinboardService {
 
         return new BulletinboardListReplyResponse(bsreplyList, replycount);
     }
-
-
-    
 
 
 

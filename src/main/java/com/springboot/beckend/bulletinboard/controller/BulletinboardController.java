@@ -106,6 +106,9 @@ public class BulletinboardController {
            return ResponseEntity.ok(service.getBulBoardReplyList(seq, req));
     }
 
+
+    
+
     
    
 }

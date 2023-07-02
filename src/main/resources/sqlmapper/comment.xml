@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.beckend.comment.dao.CommentDao"> 
+	
+	<select id="getCommentList" parameterType="com.springboot.beckend.comment.dto.param.CommentListParam"
+	 resultType="com.springboot.beckend.comment.domain.Comment">
+	 	SELECT *
+		FROM  (SELECT row_number() OVER(ORDER BY ref DESC, step ASC) AS RowNumber,
+		bulSeq, id,  content, createdAt, ref, step, depth, del
+		FROM comment WHERE bulSeq=#{bulSeq}
+		ORDER BY ref DESC, step ASC) as t
+		WHERE t.RowNumber BETWEEN ${pageStart} AND ${pageEnd}
+
+	</select>
+
+    	<!-- 페이징처리용 검색시 게시글 카운트 -->
+	<select id="getCommentCount" parameterType="java.lang.Integer"
+	 resultType="java.lang.Integer">
+	
+		SELECT ifnull(count(*),0) FROM comment WHERE bulSeq=#{bulSeq}
+       
+	</select>
+
+
+    <!--상세 게시글 댓글작성 -->
+	<insert id="createComment" parameterType="com.springboot.beckend.comment.dto.param.CreateCommentParam"
+	useGeneratedKeys="true" keyProperty="seq">
+	    INSERT comment (bulSeq, id, content, createdat, ref, step, depth,  del)
+		VALUES (#{bulSeq}, #{id}, #{content}, NOW(), (SELECT ifnull(max(ref), 0)+1 as ref from comment test), 0, 0, 0)
+	</insert>
+
+    <!-- 댓글 삭제 -->
+	<update id="deleteComment" parameterType="java.lang.Integer" >
+		UPDATE comment
+		SET del = 1
+		WHERE seq = #{seq}
+	</update>
+
+	<!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="com.springboot.beckend.comment.dto.param.UpdateCommentParam" >
+		UPDATE comment
+		SET content = #{content}
+		WHERE seq = #{seq}
+	</update>
+
+</mapper>
