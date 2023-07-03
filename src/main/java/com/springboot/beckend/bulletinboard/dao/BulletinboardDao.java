@@ -5,13 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
 import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
-import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListReplyParam;
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
-import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateReadCountPram;
 import com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam;
 
@@ -40,18 +37,21 @@ public interface BulletinboardDao {
     //게시글 삭제 필드에 1이면 나중에 스케쥴러사용 지정한 시간대에 일괄삭제 한다.
     public Integer deleteBulBoard(Integer seq);
 
-
     //게시글 수정
     public Integer updateBulBoard(UpdateBullinboardParam param);
 
-    //게시글 답글 생성
-    public void createBulBoardReply(CreateBullinboardReplyParam param);
 
-    //게시글 댓글 출력
-    public List<Bulletinboard> getBulBoardReplyList(@Param("seq")Integer seq , @Param("param")BulletinboardListReplyParam param);
 
-    //게시글 댓글 페이징용 카운트
-    public Integer getBulReplyCountboard(Integer seq);
+
+    
+    // //게시글 답글 생성
+    // public void createBulBoardReply(CreateBullinboardReplyParam param);
+
+    // //게시글 댓글 출력
+    // public List<Bulletinboard> getBulBoardReplyList(@Param("seq")Integer seq , @Param("param")BulletinboardListReplyParam param);
+
+    // //게시글 댓글 페이징용 카운트
+    // public Integer getBulReplyCountboard(Integer seq);
 
     // public Integer updateBulBoardReplyStep(Integer parentSeq);
 	// public Integer getBulBoardReplyCount(Integer parentSeq);

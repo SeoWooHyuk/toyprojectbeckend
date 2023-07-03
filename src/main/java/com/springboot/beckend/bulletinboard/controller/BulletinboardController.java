@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListReplyRequest;
+
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
-import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.request.UpdateBullinboardRequest;
-import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListReplyResponse;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardResponse;
 import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
@@ -87,24 +85,24 @@ public class BulletinboardController {
            return ResponseEntity.ok(service.deleteBulBoard(seq));
     }
 
-    //게시글댓글 생성
-    @PostMapping("/{seq}/reply")
-    public ResponseEntity<CreateBullinboardResponse> createBulBoardReply(@PathVariable Integer seq, 
-    @RequestBody CreateBullinboardReplyRequest req)
-    {
-           System.out.println("BulletinboardController createBulBoardReply() " + new Date());
-           return ResponseEntity.ok(service.createBulBoardReply(seq,req));
-    }
+    // //게시글댓글 생성
+    // @PostMapping("/{seq}/reply")
+    // public ResponseEntity<CreateBullinboardResponse> createBulBoardReply(@PathVariable Integer seq, 
+    // @RequestBody CreateBullinboardReplyRequest req)
+    // {
+    //        System.out.println("BulletinboardController createBulBoardReply() " + new Date());
+    //        return ResponseEntity.ok(service.createBulBoardReply(seq,req));
+    // }
 
 
-    //게시글 댓글출력
-    @GetMapping("/{seq}/reply")
-    public ResponseEntity<BulletinboardListReplyResponse> getBulBoardReplyList(@PathVariable Integer seq, 
-    @ModelAttribute BulletinboardListReplyRequest req)
-    {
-           System.out.println("BulletinboardController getBulBoardReplyList() " + new Date());
-           return ResponseEntity.ok(service.getBulBoardReplyList(seq, req));
-    }
+    // //게시글 댓글출력
+    // @GetMapping("/{seq}/reply")
+    // public ResponseEntity<BulletinboardListReplyResponse> getBulBoardReplyList(@PathVariable Integer seq, 
+    // @ModelAttribute BulletinboardListReplyRequest req)
+    // {
+    //        System.out.println("BulletinboardController getBulBoardReplyList() " + new Date());
+    //        return ResponseEntity.ok(service.getBulBoardReplyList(seq, req));
+    // }
 
 
     

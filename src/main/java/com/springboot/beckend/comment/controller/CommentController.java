@@ -22,8 +22,11 @@ import com.springboot.beckend.comment.dto.response.DeleteCommentResponse;
 import com.springboot.beckend.comment.dto.response.UpdateCommentResponse;
 import com.springboot.beckend.comment.service.CommentService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/comment")
+@Tag(name = "CommentController", description = "게시판 댓글")
 public class CommentController {
 
     private final CommentService service;
@@ -53,6 +56,8 @@ public class CommentController {
     @DeleteMapping("/{seq}")
     public ResponseEntity<DeleteCommentResponse> deleteComment(@PathVariable Integer seq)
     {
+
+        System.out.println(seq);
         System.out.println("CommentController deleteComment() " + new Date());
         return ResponseEntity.ok(service.deleteComment(seq));
     }
@@ -63,7 +68,6 @@ public class CommentController {
     public ResponseEntity<UpdateCommentResponse> updateComment(@PathVariable Integer seq, @RequestBody UpdateCommentRequest req)
     {
         System.out.println("CommentController updateComment() " + new Date());
-        System.out.println(req.getContent());
         return ResponseEntity.ok(service.updateComment(seq,req));
     }
 

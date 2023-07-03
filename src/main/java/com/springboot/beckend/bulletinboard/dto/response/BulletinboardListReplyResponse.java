@@ -1,23 +1,23 @@
-package com.springboot.beckend.bulletinboard.dto.response;
+// package com.springboot.beckend.bulletinboard.dto.response;
 
-import java.util.List;
+// import java.util.List;
 
-import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
+// import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 
-import lombok.Getter;
-import lombok.Setter;
+// import lombok.Getter;
+// import lombok.Setter;
 
-@Getter
-@Setter
-public class BulletinboardListReplyResponse {
+// @Getter
+// @Setter
+// public class BulletinboardListReplyResponse {
 
-    private List<Bulletinboard> bsReplyList;
-    private Integer pageCnt;
+//     private List<Bulletinboard> bsReplyList;
+//     private Integer pageCnt;
 
 
-     public BulletinboardListReplyResponse(List<Bulletinboard> bsReplyList,Integer pageCnt) {
-        this.bsReplyList = bsReplyList;
-        this.pageCnt = pageCnt;
-    }
+//      public BulletinboardListReplyResponse(List<Bulletinboard> bsReplyList,Integer pageCnt) {
+//         this.bsReplyList = bsReplyList;
+//         this.pageCnt = pageCnt;
+//     }
 
-}
+// }

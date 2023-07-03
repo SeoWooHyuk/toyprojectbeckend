@@ -1,10 +1,10 @@
-package com.springboot.beckend.bulletinboard.dto.request;
+// package com.springboot.beckend.bulletinboard.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+// import lombok.Getter;
+// import lombok.Setter;
 
-@Getter
-@Setter
-public class BulletinboardListReplyRequest {
-    private Integer page;
-}
+// @Getter
+// @Setter
+// public class BulletinboardListReplyRequest {
+//     private Integer page;
+// }

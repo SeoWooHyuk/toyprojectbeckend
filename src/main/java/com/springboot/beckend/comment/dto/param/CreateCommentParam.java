@@ -1,6 +1,4 @@
 package com.springboot.beckend.comment.dto.param;
-
-import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
 import com.springboot.beckend.comment.dto.request.CreateCommentRequest;
 
 import lombok.Getter;

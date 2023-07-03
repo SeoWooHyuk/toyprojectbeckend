@@ -9,18 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.springboot.beckend.bulletinboard.dao.BulletinboardDao;
 import com.springboot.beckend.bulletinboard.domain.Bulletinboard;
 import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListParam;
-import com.springboot.beckend.bulletinboard.dto.param.BulletinboardListReplyParam;
+
 import com.springboot.beckend.bulletinboard.dto.param.CountParam;
 import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardParam;
-import com.springboot.beckend.bulletinboard.dto.param.CreateBullinboardReplyParam;
+
 import com.springboot.beckend.bulletinboard.dto.param.CreateReadCountPram;
 import com.springboot.beckend.bulletinboard.dto.param.UpdateBullinboardParam;
-import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListReplyRequest;
+
 import com.springboot.beckend.bulletinboard.dto.request.BulletinboardListRequest;
-import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardReplyRequest;
+
 import com.springboot.beckend.bulletinboard.dto.request.CreateBullinboardRequest;
 import com.springboot.beckend.bulletinboard.dto.request.UpdateBullinboardRequest;
-import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListReplyResponse;
+
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardListResponse;
 import com.springboot.beckend.bulletinboard.dto.response.BulletinboardResponse;
 import com.springboot.beckend.bulletinboard.dto.response.CreateBullinboardResponse;
@@ -65,19 +65,14 @@ public class BulletinboardService {
     //게시글 상세
      public BulletinboardResponse getbulletinboard(Integer seq, String readerId)
      {
-
-        System.out.println("게시글상세 아이디"+readerId);
-        System.out.println("게시글 번호"+seq);
         CreateReadCountPram param = new CreateReadCountPram(seq, readerId);
         System.out.println(param.getReaderId());
         System.out.println(param.getSeq());
 
 
         Integer check =  dao.createBulBoardReadCountHistory(param); //sql 문으로 ON DUPLICATE KEY pk값이 사용하여 중복되지않는값은 인설트되어 1출력 중복이되는 키값이있으면 업데이트되어 2출력
-        System.out.println(check + "2가니오면 중복임");
         if(check == 1) //1이 여지만 중복되는 키값이 없다는 뜻으로 조회수를 증가시킨다.
         {
-            System.out.println("조회수 증가되는거?");
             dao.increaseBulBoardReadCount(seq);
         }
         return new BulletinboardResponse(dao.getbulletinboard(seq));
@@ -107,28 +102,28 @@ public class BulletinboardService {
         return new DeleteBullinboardResponse(deletecheck);
     }
 
-    //게시글 댓글 생성
-    public CreateBullinboardResponse createBulBoardReply(Integer seq, CreateBullinboardReplyRequest req)
-    {
-        CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(seq, req);
-        dao.createBulBoardReply(param);
-        return new CreateBullinboardResponse(param.getSeq());
-    }
+    // //게시글 댓글 생성
+    // public CreateBullinboardResponse createBulBoardReply(Integer seq, CreateBullinboardReplyRequest req)
+    // {
+    //     CreateBullinboardReplyParam param = new CreateBullinboardReplyParam(seq, req);
+    //     dao.createBulBoardReply(param);
+    //     return new CreateBullinboardResponse(param.getSeq());
+    // }
 
 
-    //게시글 댓글 출력
-    public BulletinboardListReplyResponse getBulBoardReplyList(Integer seq, BulletinboardListReplyRequest req)
-    {
-        BulletinboardListReplyParam param = new BulletinboardListReplyParam(req);
-        param.setPageParam(req.getPage(),10);
-           Integer replycount =   dao.getBulReplyCountboard(seq);
+    // //게시글 댓글 출력
+    // public BulletinboardListReplyResponse getBulBoardReplyList(Integer seq, BulletinboardListReplyRequest req)
+    // {
+    //     BulletinboardListReplyParam param = new BulletinboardListReplyParam(req);
+    //     param.setPageParam(req.getPage(),10);
+    //        Integer replycount =   dao.getBulReplyCountboard(seq);
 
-        System.out.println(param.getPageStart() + "페이징 스타트");
+    //     System.out.println(param.getPageStart() + "페이징 스타트");
 
-        List<Bulletinboard> bsreplyList = dao.getBulBoardReplyList(seq,param);
+    //     List<Bulletinboard> bsreplyList = dao.getBulBoardReplyList(seq,param);
 
-        return new BulletinboardListReplyResponse(bsreplyList, replycount);
-    }
+    //     return new BulletinboardListReplyResponse(bsreplyList, replycount);
+    // }
 
 
 

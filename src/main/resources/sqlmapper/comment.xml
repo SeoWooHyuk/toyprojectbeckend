@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 resultType="com.springboot.beckend.comment.domain.Comment">
 	 	SELECT *
 		FROM  (SELECT row_number() OVER(ORDER BY ref DESC, step ASC) AS RowNumber,
-		bulSeq, id,  content, createdAt, ref, step, depth, del
+		seq ,bulSeq, id,  content, createdAt, ref, step, depth, del
 		FROM comment WHERE bulSeq=#{bulSeq}
 		ORDER BY ref DESC, step ASC) as t
 		WHERE t.RowNumber BETWEEN ${pageStart} AND ${pageEnd}
