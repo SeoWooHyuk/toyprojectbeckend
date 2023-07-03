@@ -55,7 +55,7 @@ public class JwtTokenUtil implements Serializable {
     //generate token for user
     //사용자를 위한 토큰 생성
     public String generateToken(UserDetails userDetails) {
-        System.out.println(secret); 
+        System.out.println(secret + "JwtTokenUtil.class generateToken()"); 
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, userDetails.getUsername());
     }
@@ -67,8 +67,8 @@ public class JwtTokenUtil implements Serializable {
     //   compaction of the JWT to a URL-safe string
     private String doGenerateToken(Map<String, Object> claims, String subject) {
 
-        System.out.println(subject);
-        System.out.println(claims);
+        System.out.println(subject + "JwtTokenUtil.class doGenerateToken()");
+        System.out.println(claims + "JwtTokenUtil.class doGenerateToken()");
 
         return Jwts.builder()
                     .setClaims(claims)

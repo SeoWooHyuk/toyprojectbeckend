@@ -108,7 +108,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationEventPublisher authenticationEventPublisher
+    public AuthenticationEventPublisher authenticationEventPublisher //인증인가에관한 이벤트를 발생
             (ApplicationEventPublisher applicationEventPublisher) {
         return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
     }

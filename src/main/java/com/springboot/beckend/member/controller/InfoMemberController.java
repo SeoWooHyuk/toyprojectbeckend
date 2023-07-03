@@ -2,6 +2,8 @@ package com.springboot.beckend.member.controller;
 
 import java.util.Date;
 import jakarta.validation.Valid;
+
+import org.json.HTTP;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -63,7 +65,10 @@ public class InfoMemberController {
 		System.out.println("UserController handleMethodArgumentNotValidException " + new Date());
 
 		BindingResult bs = e.getBindingResult();
-		StringBuilder sb = new StringBuilder();
+		//회원가입에있는 @Valid 어노테이션을 사용한 유효성 검증이 실패하면, MethodArgumentNotValidException 예외가 발생할 때 함께 생성되어 반환
+		StringBuilder sb = new StringBuilder(); //tringBuilder 클래스는 문자열 연결 시 발생하는 성능 이슈를 해결하기 위해 제공되는 클래스
+
+		//BindingResult 인터페이스의 getFieldErrors() 메소드는 검증한 필드의 에러 목록을 가져오는 역할
 		bs.getFieldErrors().forEach(err -> {
 			sb.append(String.format("[%s]: %s.\n입력된 값: %s",
 						err.getField(), err.getDefaultMessage(), err.getRejectedValue()));
@@ -71,10 +76,12 @@ public class InfoMemberController {
 
 		// Map 으로 보낸다면 프론트에서 사용하기 더 편리할 듯 !
 		return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+		//HTTP 상태코드 400(Bad Request)를 응답
 	}
 
 	/* 사용자 관련 요청 예외처리 핸들러 */
 	@ExceptionHandler(InfoMemberException.class)
+	//메소드에서 발생한 예외를 자동으로 캐치해서 처리
 	public ResponseEntity<?> handleUserException(InfoMemberException e) {
 		System.out.println("UserController handlerUserException " + new Date());
 
